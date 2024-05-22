@@ -84,7 +84,7 @@ const Chat = () => {
     ) {
       let subtitle = `${appStateContext.state.isCosmosDBAvailable.status}. Please contact the site administrator.`
       setErrorMsg({
-        title: 'Chat history is not enabled',
+        title: '履歴保存は許可されていません',
         subtitle: subtitle
       })
       toggleErrorDialog()
@@ -309,7 +309,7 @@ const Chat = () => {
       setMessages(request.messages)
     }
     let result = {} as ChatResponse
-    var errorResponseMessage = 'Please try again. If the problem persists, please contact the site administrator.'
+    var errorResponseMessage = 'もう一度お試しください。問題が解決しない場合は、サイト管理者にお問い合わせください'
     try {
       const response = conversationId
         ? await historyGenerate(request, abortController.signal, conversationId)
@@ -321,14 +321,14 @@ const Chat = () => {
         let errorChatMsg: ChatMessage = {
           id: uuid(),
           role: ERROR,
-          content: `There was an error generating a response. Chat history can't be saved at this time. ${errorResponseMessage}`,
+          content: `応答を生成するエラーが発生しました。現在、チャット履歴は保存できません ${errorResponseMessage}`,
           date: new Date().toISOString()
         }
         let resultConversation
         if (conversationId) {
           resultConversation = appStateContext?.state?.chatHistory?.find(conv => conv.id === conversationId)
           if (!resultConversation) {
-            console.error('Conversation not found.')
+            console.error('会話がみつかりません')
             setIsLoading(false)
             setShowLoadingMessage(false)
             abortFuncs.current = abortFuncs.current.filter(a => a !== abortController)
@@ -770,7 +770,7 @@ const Chat = () => {
                     <div className={styles.chatMessageGpt}>
                       <Answer
                         answer={{
-                          answer: 'Generating answer...',
+                          answer: '回答を作成中です...',
                           citations: []
                         }}
                         onCitationClicked={() => null}
@@ -794,7 +794,7 @@ const Chat = () => {
                   onKeyDown={e => (e.key === 'Enter' || e.key === ' ' ? stopGenerating() : null)}>
                   <SquareRegular className={styles.stopGeneratingIcon} aria-hidden="true" />
                   <span className={styles.stopGeneratingText} aria-hidden="true">
-                    Stop generating
+                    回答停止
                   </span>
                 </Stack>
               )}
@@ -865,7 +865,7 @@ const Chat = () => {
               </Stack>
               <QuestionInput
                 clearOnSend
-                placeholder="Type a new question..."
+                placeholder="質問を入力してください..."
                 disabled={isLoading}
                 onSend={(question, id) => {
                   appStateContext?.state.isCosmosDBAvailable?.cosmosDB
@@ -888,7 +888,7 @@ const Chat = () => {
                 horizontalAlign="space-between"
                 verticalAlign="center">
                 <span aria-label="Citations" className={styles.citationPanelHeader}>
-                  Citations
+                  引用
                 </span>
                 <IconButton
                   iconProps={{ iconName: 'Cancel' }}
@@ -896,17 +896,6 @@ const Chat = () => {
                   onClick={() => setIsCitationPanelOpen(false)}
                 />
               </Stack>
-              <h5
-                className={styles.citationPanelTitle}
-                tabIndex={0}
-                title={
-                  activeCitation.url && !activeCitation.url.includes('blob.core')
-                    ? activeCitation.url
-                    : activeCitation.title ?? ''
-                }
-                onClick={() => onViewSource(activeCitation)}>
-                {activeCitation.title}
-              </h5>
               <div tabIndex={0}>
                 <ReactMarkdown
                   linkTarget="_blank"

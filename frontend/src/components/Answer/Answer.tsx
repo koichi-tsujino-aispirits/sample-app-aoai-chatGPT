@@ -303,7 +303,7 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
                     role="button">
                     <span>
                       {parsedAnswer.citations.length > 1
-                        ? parsedAnswer.citations.length + ' references'
+                        ? ' 参照 ' + parsedAnswer.citations.length 
                         : '1 reference'}
                     </span>
                   </Text>
@@ -317,7 +317,7 @@ export const Answer = ({ answer, onCitationClicked }: Props) => {
             </Stack.Item>
           )}
           <Stack.Item className={styles.answerDisclaimerContainer}>
-            <span className={styles.answerDisclaimer}>AI-generated content may be incorrect</span>
+            <span className={styles.answerDisclaimer}>AIで生成された回答は誤っている可能性があります</span>
           </Stack.Item>
         </Stack>
         {chevronIsExpanded && (

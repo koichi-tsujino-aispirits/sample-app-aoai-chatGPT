@@ -38,6 +38,7 @@ MINIMUM_SUPPORTED_AZURE_OPENAI_PREVIEW_API_VERSION = "2024-02-15-preview"
 load_dotenv()
 
 # UI configuration (optional)
+'''
 UI_TITLE = os.environ.get("UI_TITLE") or "Contoso"
 UI_LOGO = os.environ.get("UI_LOGO")
 UI_CHAT_LOGO = os.environ.get("UI_CHAT_LOGO")
@@ -48,7 +49,16 @@ UI_CHAT_DESCRIPTION = (
 )
 UI_FAVICON = os.environ.get("UI_FAVICON") or "/favicon.ico"
 UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
+'''
 
+# UI configuration (optional)
+UI_TITLE = os.environ.get("UI_TITLE") or " "
+UI_LOGO = "https://static.wixstatic.com/media/ea4352_bfec257a42b94aa596ecefb787951797~mv2.jpg/v1/fill/w_146,h_50,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/DX-LOGO_edited.jpg"
+UI_CHAT_LOGO = "https://static.wixstatic.com/media/ea4352_bfec257a42b94aa596ecefb787951797~mv2.jpg/v1/fill/w_146,h_50,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/DX-LOGO_edited.jpg"
+UI_CHAT_TITLE = "ご用件はなんでしょうか"
+UI_CHAT_DESCRIPTION = "あなたの質問にお答えします"
+UI_FAVICON = "https://static.wixstatic.com/media/ea4352_bfec257a42b94aa596ecefb787951797~mv2.jpg/v1/fill/w_146,h_50,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/DX-LOGO_edited.jpg"
+UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
 
 def create_app():
     app = Quart(__name__)
@@ -247,7 +257,10 @@ PROMPTFLOW_CITATIONS_FIELD_NAME = os.environ.get(
     "PROMPTFLOW_CITATIONS_FIELD_NAME", "documents"
 )
 # Frontend Settings via Environment Variables
-AUTH_ENABLED = os.environ.get("AUTH_ENABLED", "true").lower() == "true"
+#AUTH_ENABLED = os.environ.get("AUTH_ENABLED", "true").lower() == "true"
+# 修正
+
+AUTH_ENABLED = False
 CHAT_HISTORY_ENABLED = (
     AZURE_COSMOSDB_ACCOUNT
     and AZURE_COSMOSDB_DATABASE

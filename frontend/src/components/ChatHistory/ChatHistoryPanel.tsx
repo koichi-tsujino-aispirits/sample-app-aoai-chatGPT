@@ -52,11 +52,11 @@ export function ChatHistoryPanel(_props: ChatHistoryPanelProps) {
 
   const clearAllDialogContentProps = {
     type: DialogType.close,
-    title: !clearingError ? 'Are you sure you want to clear all chat history?' : 'Error deleting all of chat history',
+    title: !clearingError ? 'すべての履歴を削除してもいいですか' : 'すべての履歴の削除に失敗しました',
     closeButtonAriaLabel: 'Close',
     subText: !clearingError
-      ? 'All chat history will be permanently removed.'
-      : 'Please try again. If the problem persists, please contact the site administrator.'
+      ? 'すべての履歴は、完全に削除されます'
+      : 'もう一度お試しください。問題が解決しない場合は、サイト管理者にお問い合わせください'
   }
 
   const modalProps = {
@@ -67,7 +67,7 @@ export function ChatHistoryPanel(_props: ChatHistoryPanelProps) {
   }
 
   const menuItems: IContextualMenuItem[] = [
-    { key: 'clearAll', text: 'Clear all chat history', iconProps: { iconName: 'Delete' } }
+    { key: 'clearAll', text: 'すべての履歴を削除', iconProps: { iconName: 'Delete' } }
   ]
 
   const handleHistoryClick = () => {
@@ -116,7 +116,7 @@ export function ChatHistoryPanel(_props: ChatHistoryPanelProps) {
               marginRight: 'auto',
               paddingLeft: '20px'
             }}>
-            Chat history
+            チャット履歴
           </Text>
         </StackItem>
         <Stack verticalAlign="start">
@@ -138,7 +138,7 @@ export function ChatHistoryPanel(_props: ChatHistoryPanelProps) {
               onDismiss={onHideContextualMenu}
             />
             <CommandBarButton
-              iconProps={{ iconName: 'Cancel' }}
+              iconProps={{ iconName: 'キャンセル' }}
               title={'Hide'}
               onClick={handleHistoryClick}
               aria-label={'hide button'}
@@ -184,7 +184,7 @@ export function ChatHistoryPanel(_props: ChatHistoryPanelProps) {
                     </StackItem>
                     <StackItem>
                       <Text style={{ alignSelf: 'center', fontWeight: '400', fontSize: 14 }}>
-                        <span>Chat history can't be saved at this time</span>
+                        <span>履歴は現在保存できません</span>
                       </Text>
                     </StackItem>
                   </Stack>
@@ -222,11 +222,11 @@ export function ChatHistoryPanel(_props: ChatHistoryPanelProps) {
         dialogContentProps={clearAllDialogContentProps}
         modalProps={modalProps}>
         <DialogFooter>
-          {!clearingError && <PrimaryButton onClick={onClearAllChatHistory} disabled={clearing} text="Clear All" />}
+          {!clearingError && <PrimaryButton onClick={onClearAllChatHistory} disabled={clearing} text="すべて削除" />}
           <DefaultButton
             onClick={onHideClearAllDialog}
             disabled={clearing}
-            text={!clearingError ? 'Cancel' : 'Close'}
+            text={!clearingError ? 'キャンセル' : '閉じる'}
           />
         </DialogFooter>
       </Dialog>

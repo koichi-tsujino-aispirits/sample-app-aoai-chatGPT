@@ -13,10 +13,10 @@ import styles from './Layout.module.css'
 const Layout = () => {
   const [isSharePanelOpen, setIsSharePanelOpen] = useState<boolean>(false)
   const [copyClicked, setCopyClicked] = useState<boolean>(false)
-  const [copyText, setCopyText] = useState<string>('Copy URL')
-  const [shareLabel, setShareLabel] = useState<string | undefined>('Share')
-  const [hideHistoryLabel, setHideHistoryLabel] = useState<string>('Hide chat history')
-  const [showHistoryLabel, setShowHistoryLabel] = useState<string>('Show chat history')
+  const [copyText, setCopyText] = useState<string>('コピー')
+  const [shareLabel, setShareLabel] = useState<string | undefined>('共有')
+  const [hideHistoryLabel, setHideHistoryLabel] = useState<string>('履歴非表示')
+  const [showHistoryLabel, setShowHistoryLabel] = useState<string>('履歴表示')
   const appStateContext = useContext(AppStateContext)
   const ui = appStateContext?.state.frontendSettings?.ui
 
@@ -41,7 +41,7 @@ const Layout = () => {
 
   useEffect(() => {
     if (copyClicked) {
-      setCopyText('Copied URL')
+      setCopyText('コピー完了')
     }
   }, [copyClicked])
 
@@ -51,12 +51,12 @@ const Layout = () => {
     const handleResize = () => {
       if (window.innerWidth < 480) {
         setShareLabel(undefined)
-        setHideHistoryLabel('Hide history')
-        setShowHistoryLabel('Show history')
+        setHideHistoryLabel('履歴非表示')
+        setShowHistoryLabel('履歴表示')
       } else {
-        setShareLabel('Share')
-        setHideHistoryLabel('Hide chat history')
-        setShowHistoryLabel('Show chat history')
+        setShareLabel('共有')
+        setHideHistoryLabel('履歴非表示')
+        setShowHistoryLabel('履歴表示')
       }
     }
 
@@ -108,7 +108,7 @@ const Layout = () => {
           ]
         }}
         dialogContentProps={{
-          title: 'Share the web app',
+          title: 'URLを共有',
           showCloseButton: true
         }}>
         <Stack horizontal verticalAlign="center" style={{ gap: '8px' }}>

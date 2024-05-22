@@ -64,9 +64,9 @@ export const ChatHistoryListItemCell: React.FC<ChatHistoryListItemCellProps> = (
   const isSelected = item?.id === appStateContext?.state.currentChat?.id
   const dialogContentProps = {
     type: DialogType.close,
-    title: 'Are you sure you want to delete this item?',
-    closeButtonAriaLabel: 'Close',
-    subText: 'The history of this chat session will permanently removed.'
+    title: '本当にこの履歴を消去してもいいですか',
+    closeButtonAriaLabel: '閉じる',
+    subText: 'この履歴は完全に削除されます'
   }
 
   const modalProps = {
@@ -126,7 +126,7 @@ export const ChatHistoryListItemCell: React.FC<ChatHistoryListItemCellProps> = (
       return
     }
     if (editTitle == item.title) {
-      setErrorRename('Error: Enter a new title to proceed.')
+      setErrorRename('エラー: 新しい名前を入れてください')
       setTimeout(() => {
         setErrorRename(undefined)
         setTextFieldFocused(true)
@@ -139,7 +139,7 @@ export const ChatHistoryListItemCell: React.FC<ChatHistoryListItemCellProps> = (
     setRenameLoading(true)
     const response = await historyRename(item.id, editTitle)
     if (!response.ok) {
-      setErrorRename('Error: could not rename item')
+      setErrorRename('エラー: 名前を変更できません')
       setTimeout(() => {
         setTextFieldFocused(true)
         setErrorRename(undefined)
@@ -226,7 +226,7 @@ export const ChatHistoryListItemCell: React.FC<ChatHistoryListItemCellProps> = (
                         onKeyDown={e => (e.key === ' ' || e.key === 'Enter' ? cancelEditTitle() : null)}
                         onClick={() => cancelEditTitle()}
                         aria-label="cancel edit title"
-                        iconProps={{ iconName: 'Cancel' }}
+                        iconProps={{ iconName: 'キャンセル' }}
                         styles={{ root: { color: 'red', marginLeft: '5px' } }}
                       />
                     </Stack>
@@ -283,8 +283,8 @@ export const ChatHistoryListItemCell: React.FC<ChatHistoryListItemCellProps> = (
         dialogContentProps={dialogContentProps}
         modalProps={modalProps}>
         <DialogFooter>
-          <PrimaryButton onClick={onDelete} text="Delete" />
-          <DefaultButton onClick={toggleDeleteDialog} text="Cancel" />
+          <PrimaryButton onClick={onDelete} text="削除" />
+          <DefaultButton onClick={toggleDeleteDialog} text="キャンセル" />
         </DialogFooter>
       </Dialog>
     </Stack>
